@@ -69,7 +69,7 @@ Considerations:
 
 <hr>
 
-### (Required) [10 points] Inventory Status
+### (Required) [5 points] Inventory Status
 
 - **Required Endpoint 1:** `GET /api/inventory`
 - **Browser Accessible?** Yes
@@ -86,7 +86,7 @@ Considerations:
 
 In this example, items `A123` and `B987` each started with 1000 units and now show the following:
 
-|Item|Status|Qty|
+|SKU|Status|Qty|
 |----|------|---|
 |A123|In Stock|600|
 |A123|Shipped|300|
@@ -102,7 +102,7 @@ In this example, items `A123` and `B987` each started with 1000 units and now sh
 
 `GET /api/inventory/B987`
 
-|Item|Status|Qty|
+|SKU|Status|Qty|
 |----|------|---|
 |B987|In Stock|981|
 |B987|Shipped|19|
@@ -114,6 +114,20 @@ Considerations:
 
 <hr>
 
+### (Required) [5 points] Inventory Replenishment
+
+- **Required Endpoint:** `POST /api/inventory`
+- **Browser Accessible?** No
+- **Expected Request Body:** A data structure sufficient for notifying the warehouse that
+the seller has provided a batch of items for storage.
+- **Expected Response:** This is up to you to decide.
+
+Considerations:
+
+* Does the warehouse have a limit on how many items can be stored?
+* What error conditions might occur?  Are those errors documented?
+
+<hr>
 
 ### (Optional) [10 points] Place Order for Shipment
 
@@ -130,19 +144,36 @@ Considerations:
 
 <hr>
 
+### (Optional) [10 points] JavaScript Drop-In
 
-### (Optional) [10 points] Inventory Replenishment
+* Provide a file of JavaScript code that can be used by developers
+to make their front-end code easier to write.  
+* Provide an HTML snippet that developers can copy and paste in order
+to include your JavaScript library.
+* Document how to use your code.
+* For a real-world example, see the <em>[Hello World](https://developers.google.com/maps/documentation/javascript/tutorial)</em> tutorial for the Google Maps API.
 
-- **Required Endpoint:** `POST /api/inventory`
-- **Browser Accessible?** No
-- **Expected Request Body:** A data structure sufficient for notifying the warehouse that
-the seller has provided a batch of items for storage.
-- **Expected Response:** This is up to you to decide.
+Example HTML Snippet: `<script src="/api/inventory.js>`
+
+Example Usage:
+``` js
+let warehouse = new Warehouse();
+
+// Gets current inventory status of all items
+let items = warehouse.items(); 
+
+// Access individual item properties,
+// for example:
+console.debug(items[0].sku)
+console.debug(items[0].qty)
+```
+
 
 Considerations:
 
 * Does the warehouse have a limit on how many items can be stored?
 * What error conditions might occur?  Are those errors documented?
+
 
 
 <hr>
