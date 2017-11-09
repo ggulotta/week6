@@ -7,17 +7,21 @@ class MyApp
   def call(env)
     movie_data = IO.read('rogue_one.json')
 
-    [ '200',
-      {'Content-Type' => 'text/html'},
-      ["<html><body><h1>Hello world!</h1><p>This page should return JSON instead.</p></body></html>"]
-    ]
+    if env['HTTP_IF_MODIFIED_SINCE'] == '2017-10-01'
+      [
+        '301',
+        {"Location" => "https://mydomain.com/movies/1"},
+        []
+      ]
+    else
+      [ '200',
+        {'Content-Type' => 'text/html', 'Cache-Control' => 'max-age=3600',
+        'Last-Modified' => '2017-10-01',
+        ["<html><body><h1>Hello world!</h1><p>This page should return JSON instead.</p></body></html>"]
+      ]
+    end
   end
 
 end
 
 run MyApp.new
-
-# Next steps:
-# |> Create a Rack app to insert a Content-Length header
-# |> Create a Rack app to insert an HTML footer
-# |> Create a Rack app to add a Logger
