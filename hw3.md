@@ -2,7 +2,7 @@
 
 **30 points**
 
-**DUE: Tuesday, Nov 27, 6pm.**
+**DUE: Tuesday, Nov 28, 6pm.**
 
 Your task is to build a modern, functioning web service.  
 
@@ -160,7 +160,7 @@ Example Usage:
 let warehouse = new Warehouse();
 
 // Gets current inventory status of all items
-let items = warehouse.items(); 
+let items = warehouse.items();
 
 // Access individual item properties,
 // for example:
